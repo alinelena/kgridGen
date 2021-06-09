@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 project(kgridGen
-	VERSION 0.1.1
-	HOMEPAGE_URL https://github.com/msg-byu/kgridGen
-	LANGUAGES Fortran)
+  VERSION 0.1.1
+  HOMEPAGE_URL https://github.com/msg-byu/kgridGen
+  LANGUAGES Fortran)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 if (NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release")
+  set(CMAKE_BUILD_TYPE "Release")
 endif()
 include(helper)
 include(flags)
@@ -22,7 +22,7 @@ if(INTERNAL_SYMLIB)
     include(ExternalProject)
     ExternalProject_Add(int-symlib
       GIT_REPOSITORY https://github.com/alinelena/symlib
-			GIT_TAG master
+      GIT_TAG master
       GIT_PROGRESS true
       PREFIX int-symlib
       BINARY_DIR int-symlib/build
@@ -35,12 +35,12 @@ if(INTERNAL_SYMLIB)
 
 else()
     find_package(PkgConfig REQUIRED)
-		pkg_check_modules(SYMLIB REQUIRED symlib>=2.0.1)
-		set(SYMLIB_INC ${SYMLIB_INCLUDE_DIRS})
-		set(SYMLIB_LIB ${SYMLIB_LIBRARY_DIRS})
+    pkg_check_modules(SYMLIB REQUIRED symlib>=2.0.1)
+    set(SYMLIB_INC ${SYMLIB_INCLUDE_DIRS})
+    set(SYMLIB_LIB ${SYMLIB_LIBRARY_DIRS})
     set(LIBS ${SYMLIB_LIBRARIES})
-		message(STATUS "symlib include dirs ${SYMLIB_INC}")
-		message(STATUS "symlib include dirs ${LIBS}")
+    message(STATUS "symlib include dirs ${SYMLIB_INC}")
+    message(STATUS "symlib include dirs ${LIBS}")
 endif()
 link_directories(${SYMLIB_LIB})
 
